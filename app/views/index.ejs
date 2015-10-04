@@ -19,8 +19,9 @@
 
 </head>
 <body ng-app="todo2copy">
+	<h1>Welcome</h1>
 
-	<section ng-view class="main-section"></section>
+	<section ng-view></section>
 
 	<script type="text/javascript">
 		window.user = <%- user || 'null' %>;
@@ -49,7 +50,7 @@
 	<!-- Example Module -->
 	<script type="text/javascript" src="/modules/example/example.client.module.js"></script>
 	<script type="text/javascript" src="/modules/example/controllers/example.client.controller.js"></script>
-	<script type="text/javascript" src="/modules/example/controllers/example.client.controller.js"></script>
+	<script type="text/javascript" src="/modules/example/config/example.client.routes.js"></script>
 
 	<!-- Load Application -->
 	<script type="text/javascript" src="/application.js"></script>
