@@ -6,7 +6,7 @@ var getErrorMessage = function (err) {
 	if (err.code) {
 		switch (err.code) {
 			case 11000:
-			case 11000:
+			case 11001:
 				message = 'Username already exist';
 				break;
 			default:
@@ -39,7 +39,7 @@ exports.renderRegister = function (req, res, next) {
 	if (!req.user) {
 		res.render('register', {
 			title: 'Register Form',
-			message: req.flash('error')
+			messages: req.flash('error')
 		});
 	}
 	else {
@@ -53,14 +53,14 @@ exports.register = function (req, res, next) {
 		var message = null;
 
 		user.provider = 'local';
-		user.save(function (err, user) {
+		user.save(function (err) {
 			if (err) {
 				var message = getErrorMessage(err);
 				req.flash('error', message);
 				return res.redirect('/register');
 			}
 			else {
-				req.login(function (err) {
+				req.login(user, function (err) {
 					if (err) {
 						return next(err);
 					}
@@ -100,9 +100,9 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
 
 						user.save(function (err) {
 							if (err) {
-								var message = getErrorMessage(err);
+								var message = _this.getErrorMessage(err);
 								req.flash('error', message);
-								return res.redirect('/signup');
+								return res.redirect('/register');
 							}
 							else {
 								return done(err, user);
@@ -120,7 +120,7 @@ exports.saveOAuthUserProfile = function (req, profile, done) {
 
 exports.create = function (req, res, next) {
 	var user = new User(req.body);
-	user.save(function (err, user) {
+	user.save(function (err) {
 		if (err) {
 			return next(err);
 		}
@@ -180,4 +180,15 @@ exports.delete = function (req, res, next) {
 			return res.json(req.user);
 		}
 	});
+};
+
+exports.requiresLogin = function (req, res, next) {
+	if (!req.isAuthenticated()) {
+		return res.status(401).send({
+			message: 'User is not logged in'
+		});
+	}
+	else {
+		next();
+	}
 };

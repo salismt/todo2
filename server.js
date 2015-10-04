@@ -12,4 +12,4 @@ var db = mongoose(),
 app.listen(config.port);
 module.exports = app;
 
-console.log('Server is listening to port ' + config.port);
+console.log(process.env.NODE_ENV + ' server is listening to port ' + config.port);

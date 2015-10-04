@@ -1,22 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:ng="http://angularjs.org">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+    <meta name="author" content="Salis Muhammad">
+
 	<title><%= title %></title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/mean.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
 </head>
-<body>
+<body ng-app="todo2copy">
 
-	<h1><%= title %></h1>
-	<img src="img/todologo.png" alt="todologo">
+	<section ng-view class="main-section"></section>
 
-	<% if (user) { %>
-		<h2>Hello <%= user %></h2>
-		<a href="/logout">Logout</a>
-	<% } else { %>
-		<a href="/register">Register</a>
-		<a href="/login">Login</a>
-	<% } %>
+	<script type="text/javascript">
+		window.user = <%- user || 'null' %>;
+	</script>
+
+	<!-- CSS Stuff -->
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/mean.js"></script>
 	
+	<!-- Angular Setup -->
+	<script type="text/javascript" src="/js/angular/angular.min.js"></script>
+	<script type="text/javascript" src="/js/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="/js/angular-resource/angular-resource.min.js"></script>
 
+	<!-- Users Authentication Module -->
+	<script type="text/javascript" src="/modules/users/users.client.module.js"></script>
+	<script type="text/javascript" src="/modules/users/services/users.client.service.js"></script>
+
+	<!-- Todos Module -->
+	<script type="text/javascript" src="/modules/todos/todos.client.module.js"></script>
+	<script type="text/javascript" src="/modules/todos/controllers/todos.client.controller.js"></script>
+	<script type="text/javascript" src="/modules/todos/services/todos.client.service.js"></script>
+	<script type="text/javascript" src="/modules/todos/config/todos.client.routes.js"></script>
+
+	<!-- Example Module -->
+	<script type="text/javascript" src="/modules/example/example.client.module.js"></script>
+	<script type="text/javascript" src="/modules/example/controllers/example.client.controller.js"></script>
+	<script type="text/javascript" src="/modules/example/controllers/example.client.controller.js"></script>
+
+	<!-- Load Application -->
+	<script type="text/javascript" src="/application.js"></script>
 </body>
 </html>

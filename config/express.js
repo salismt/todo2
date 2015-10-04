@@ -29,6 +29,7 @@ module.exports = function() {
 
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
+    require('../app/routes/todos.server.routes')(app);
     app.use(express.static('./public'));
     return app;
 };
